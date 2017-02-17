@@ -7,30 +7,30 @@ exports.addNote = function(req, res, next){
 
     notestore.add(user, text, function(response){
 
-        if (response.status=="success"){
-            success(req, res, response.data);
-        }
-        else {
-            error(req, res, response);
-        }
+        response(req , res, dbresponse);
     });
 };
 
 exports.getNotes = function (req, res, next){
-    notestore.list(function(response){
+    notestore.list(function(dbresponse){
 
-        if (response.status=="success"){
-            success(req, res, response.data);
-        }
-        else {
-            error(req, res, response);
-        }
+        response(req , res, dbresponse);
     });
 
 }
 
 
 // INTERNAL FUNCTIONS FOR RECURSIVE SUCCESS OR ERROR
+
+function response(req, res, data){
+
+    if (data.status=="success"){
+        success(req, res, data.data);
+    }
+    else {
+        error(req, res, data);
+    }
+};
 
 function success (req, res, data){
     res.status(200).json(data);
