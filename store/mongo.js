@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-    config= require ('../config');
+    config = require ('../config');
 
 //MONGOOSE CONNECTION
 
@@ -10,3 +10,5 @@ mongoose.connect(config.mongoUri, function (error) {
         console.log('mongo connected');
     }
 });
+
+module.exports = mongoose;
