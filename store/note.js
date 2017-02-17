@@ -32,6 +32,18 @@ exports.add = function(user, text, callback ){
         } else {
             callback({status: 'success', data: data}); // if success it will return the data saved.
         }
-    })
+    });
 
+};
+
+exports.list = function (callback){
+    noteModel.find({},function(err, data){
+        if(err) {
+            console.error ("Error! getting notes from MongoDB");
+            callback({status: 'error', message: 'Error gettin notes from database'});
+        } else {
+            callback({status: 'success', data: data}); // if success it will return the data saved.
+        }
+
+    });
 };

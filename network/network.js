@@ -13,11 +13,24 @@ exports.addNote = function(req, res, next){
         else {
             error(req, res, response);
         }
-    })
-
-
-
+    });
 };
+
+exports.getNotes = function (req, res, next){
+    notestore.list(function(response){
+
+        if (response.status=="success"){
+            success(req, res, response.data);
+        }
+        else {
+            error(req, res, response);
+        }
+    });
+
+}
+
+
+// INTERNAL FUNCTIONS FOR RECURSIVE SUCCESS OR ERROR
 
 function success (req, res, data){
     res.status(200).json(data);
