@@ -5,10 +5,15 @@ exports.addNote = function(req, res, next){
     var text = req.body.text;
     var user = req.body.user;
 
-    notestore.add(user, text, function(response){
+    if (typeof(text)==="undefined" || typeof(user)==="undefined"){
+        error(req, res, {message:"Invalid params"});
+    }
+    else {
+        notestore.add(user, text, function(response){
 
-        response(req , res, dbresponse);
-    });
+            response(req , res, dbresponse);
+        });
+    }
 };
 
 exports.getNotes = function (req, res, next){
@@ -21,11 +26,17 @@ exports.getNotes = function (req, res, next){
 
 exports.getNote = function (req, res, next){
     var id = req.params.id ;
-    notestore.get(id, function(dbresponse){
 
-        response(req , res, dbresponse);
-    });
+    if (typeof(id)==="undefined"){
+        error(req, res, {message:"Invalid params"});
+    }
+    else {
 
+        notestore.get(id, function(dbresponse){
+
+            response(req , res, dbresponse);
+        });
+    }
 };
 
 exports.addFavorite = function(req, res, next){
@@ -33,18 +44,30 @@ exports.addFavorite = function(req, res, next){
     var noteId = req.body.noteId;
     var user = req.body.user;
 
-    notestore.favorite(user, noteId, function(dbresponse){
+    if (typeof(noteId)==="undefined" || typeof(user)==="undefined"){
+        error(req, res, {message:"Invalid params"});
+    }
+    else {
 
-        response(req , res, dbresponse);
-    });
+        notestore.favorite(user, noteId, function(dbresponse){
+
+            response(req , res, dbresponse);
+        });
+    }
 };
 
 exports.getFavorite = function (req, res, next){
     var user = req.params.user ;
-    notestore.favorites(user, function(dbresponse){
 
-        response(req , res, dbresponse);
-    });
+    if (typeof(user)==="undefined"){
+        error(req, res, {message:"Invalid params"});
+    }
+    else {
+        notestore.favorites(user, function(dbresponse){
+
+            response(req , res, dbresponse);
+        });
+    }
 
 };
 

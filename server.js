@@ -37,9 +37,6 @@ app.get('/favorite/:user',network.getFavorite); // :user discriminates Caps
 
 
 
-
-
-
 var port = process.env.PORT || 3000;
 
 var server = app.listen(port, function () {
