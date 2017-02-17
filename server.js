@@ -1,10 +1,19 @@
-var express = require('express')
-    network = require('./network/network.js');
+var express = require('express'),
+    network = require('./network/network.js'),
+    bodyParser = require('body-parser');
 
 var app = express();
 
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+
 //MIDDLEWARE
+// Only Accept x-www-form-urlencoded because of the standards
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");

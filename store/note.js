@@ -23,10 +23,15 @@ exports.add = function(user, text, callback ){
             text: text,
             favorited: []
         };
-        
+
     var note = new noteModel(data);
     note.save(function(err){
-        if(err) console.log("Error! Saving note in MongoDB");
+        if(err) {
+            console.error ("Error! Saving note in MongoDB");
+            callback({status: 'error', message: 'Error saving note in database'});
+        } else {
+            callback({status: 'success', data: data}); // if success it will return the data saved.
+        }
     })
 
 };

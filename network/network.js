@@ -1,6 +1,22 @@
+var notestore = require('../store/note.js');
+
 exports.addNote = function(req, res, next){
-    var response = {result:true};
-    success (req, res, response);
+
+    var text = req.body.text;
+    var user = req.body.user;
+
+    notestore.add(user, text, function(response){
+
+        if (response.status=="success"){
+            success(req, res, response.data);
+        }
+        else {
+            error(req, res, response);
+        }
+    })
+
+
+
 };
 
 function success (req, res, data){
@@ -8,5 +24,5 @@ function success (req, res, data){
 };
 
 function error (req, res, data){
-    res.status(data.code).json({error: data.message });
+    res.status(418).json({error: data.message }); // error 418 im a tea pot (error 500 is to bored for a friday evening)
 }
