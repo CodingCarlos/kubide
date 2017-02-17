@@ -59,3 +59,32 @@ exports.get = function (id, callback){
 
     });
 };
+
+exports.favorite = function (user, noteId, callback){
+    noteModel.find({_id:noteId},function(err, data){
+        if(err) {
+            console.error ("Error! getting note from MongoDB");
+            callback({status: 'error', message: 'Error gettin note from database'});
+        } else {
+            var newFavorited = data[0].favorited;
+            if (newFavorited.indexOf(user)==-1){ // if user is not in the list, add user
+                newFavorited.push(user);
+                data[0].favorited = newFavorited;
+                noteModel.update({_id:noteId},{favorited:newFavorited},function(err, updateData){
+                    if(err) {
+                        console.error ("Error! favoriting note in MongoDB");
+                        callback({status: 'error', message: 'Error favoriting to database'});
+                    } else {
+                        callback({status: 'success', data: data[0]}); // if success it will return the data saved.
+                    }
+                });
+            }
+            else{
+                callback({status: 'success', data: data[0]}); // if success it will return the data saved.
+            }
+        }
+
+    });
+
+    //noteModel.update({_id:noteId})
+}

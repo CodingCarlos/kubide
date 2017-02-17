@@ -29,10 +29,10 @@ app.get('/', function (req, res) {
 });
 
 app.post('/note', network.addNote); // network addNote instead of tipical function for avoid spagetti code
-
 app.get('/note', network.getNotes);
-
 app.get('/note/:id', network.getNote);
+
+app.post('/favorite',network.addFavorite);
 
 
 

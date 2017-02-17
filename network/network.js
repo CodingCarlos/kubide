@@ -20,12 +20,23 @@ exports.getNotes = function (req, res, next){
 };
 
 exports.getNote = function (req, res, next){
-    var id = req.params.id ; 
+    var id = req.params.id ;
     notestore.get(id, function(dbresponse){
 
         response(req , res, dbresponse);
     });
 
+};
+
+exports.addFavorite = function(req, res, next){
+
+    var noteId = req.body.noteId;
+    var user = req.body.user;
+
+    notestore.favorite(user, noteId, function(dbresponse){
+
+        response(req , res, dbresponse);
+    });
 };
 
 
