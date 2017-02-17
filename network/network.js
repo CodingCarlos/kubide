@@ -17,7 +17,16 @@ exports.getNotes = function (req, res, next){
         response(req , res, dbresponse);
     });
 
-}
+};
+
+exports.getNote = function (req, res, next){
+    var id = req.params.id ; 
+    notestore.get(id, function(dbresponse){
+
+        response(req , res, dbresponse);
+    });
+
+};
 
 
 // INTERNAL FUNCTIONS FOR RECURSIVE SUCCESS OR ERROR

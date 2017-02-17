@@ -32,6 +32,8 @@ app.post('/note', network.addNote); // network addNote instead of tipical functi
 
 app.get('/note', network.getNotes);
 
+app.get('/note/:id', network.getNote);
+
 
 
 

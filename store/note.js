@@ -47,3 +47,15 @@ exports.list = function (callback){
 
     });
 };
+
+exports.get = function (id, callback){
+    noteModel.find({_id:id},function(err, data){
+        if(err) {
+            console.error ("Error! getting note from MongoDB");
+            callback({status: 'error', message: 'Error gettin note from database'});
+        } else {
+            callback({status: 'success', data: data}); // if success it will return the data saved.
+        }
+
+    });
+};
