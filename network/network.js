@@ -39,6 +39,15 @@ exports.addFavorite = function(req, res, next){
     });
 };
 
+exports.getFavorite = function (req, res, next){
+    var user = req.params.user ;
+    notestore.favorites(user, function(dbresponse){
+
+        response(req , res, dbresponse);
+    });
+
+};
+
 
 // INTERNAL FUNCTIONS FOR RECURSIVE SUCCESS OR ERROR
 

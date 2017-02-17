@@ -33,6 +33,9 @@ app.get('/note', network.getNotes);
 app.get('/note/:id', network.getNote);
 
 app.post('/favorite',network.addFavorite);
+app.get('/favorite/:user',network.getFavorite); // :user discriminates Caps
+
+
 
 
 

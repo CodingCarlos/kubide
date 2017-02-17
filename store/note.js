@@ -86,5 +86,17 @@ exports.favorite = function (user, noteId, callback){
 
     });
 
-    //noteModel.update({_id:noteId})
+
 }
+
+exports.favorites = function (user, callback){
+    noteModel.find({favorited:user},function(err, data){
+        if(err) {
+            console.error ("Error! getting notes from MongoDB");
+            callback({status: 'error', message: 'Error gettin notes from database'});
+        } else {
+            callback({status: 'success', data: data}); // if success it will return the data saved.
+        }
+
+    });
+};
